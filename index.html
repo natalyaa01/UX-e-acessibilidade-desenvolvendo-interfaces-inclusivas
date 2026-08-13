@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segurança Digital Amiga - Guia para a Terceira Idade</title>
+    <style>
+        /* CSS Reset e Variáveis de Acessibilidade */
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #1a1a1a;
+            --card-bg: #ffffff;
+            --primary: #0056b3;
+            --primary-hover: #003d80;
+            --accent: #28a745;
+            --warning: #d9534f;
+            --focus-outline: #ff9900;
+            --font-scale: 1;
+        }
+
+        /* Tema Alto Contraste */
+        body.high-contrast {
+            --bg-color: #000000;
+            --text-color: #ffff00;
+            --card-bg: #121212;
+            --primary: #ffff00;
+            --primary-hover: #ffffff;
+            --accent: #00ff00;
+            --warning: #ff3333;
+            --focus-outline: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            font-size: calc(18px * var(--font-scale));
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Barra de Acessibilidade Fixa Topo */
+        .accessibility-bar {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .accessibility-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-access {
+            background-color: #ffffff;
+            color: #2c3e50;
+            border: 2px solid #ffffff;
+            padding: 8px 14px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            min-height: 44px; /* Tamanho mínimo de toque */
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-access:hover, .btn-access:focus {
+            background-color: #e2e8f0;
+            outline: 3px solid var(--focus-outline);
+        }
+
+        /* Cabeçalho Principal */
+        header {
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Container Principal */
+        main {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        /* Cards e Seções */
+        .card {
+            background-color: var(--card-bg);
+            border: 2px solid #ccc;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .card h2 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 8px;
+        }
+
+        /* Grid de Dicas Práticas */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .tip-item {
+            background-color: rgba(0,0,0,0.03);
+            border-left: 6px solid var(--primary);
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .tip-item.danger {
+            border-left-color: var(--warning);
+        }
+
+        .tip-item.success {
+            border-left-color: var(--accent);
+        }
+
+        .tip-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        /* Guia Interativo / Quiz Simples */
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 2px solid var(--primary);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .quiz-option:hover, .quiz-option:focus {
+            background-color: var(--primary);
+            color: #ffffff;
+            outline: 3px solid var(--focus-outline);
+        }
+
+        /* Botão de Emergência SOS */
+        .sos-section {
+            background-color: #fff0f0;
+            border: 3px solid var(--warning);
+        }
+
+        body.high-contrast .sos-section {
+            background-color: #220000;
+        }
+
+        .btn-sos {
+            background-color: var(--warning);
+            color: #ffffff;
+            font-size: 1.3rem;
+            font-weight: bold;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            margin-top: 10px;
+            display: block;
+            text-decoration: none;
+        }
+
+        .btn-sos:hover, .btn-sos:focus {
+            background-color: #b52b27;
+            outline: 3px solid var(--focus-outline);
+        }
+
+        /* Rodapé */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #2c3e50;
+            color: #ffffff;
+            margin-top: 40px;
+        }
+
+        /* Animação e Interatividade via Pure CSS / HTML Details */
+        details {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: rgba(0,0,0,0.02);
+            border-radius: 6px;
+        }
+
+        summary {
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        summary:hover, summary:focus {
+            outline: 2px solid var(--focus-outline);
+        }
+
+        /* Esconder checkboxes de estado */
+        .state-toggle {
+            display: none;
+        }
+
+        /* Troca de Fontes via Pure CSS */
+        #font-large:checked ~ body {
+            --font-scale: 1.25;
+        }
+
+        #font-xlarge:checked ~ body {
+            --font-scale: 1.45;
+        }
+
+        #contrast-toggle:checked ~ body {
+            --bg-color: #000000;
+            --text-color: #ffff00;
+            --card-bg: #1a1a1a;
+            --primary: #ffff00;
+            --accent: #00ff00;
+            --warning: #ff4444;
+        }
+
+        /* Ícones simples em CSS/Texto */
+        .icon {
+            font-style: normal;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Checkboxes de Controle de Acessibilidade em Pure CSS -->
+    <input type="radio" name="font-size" id="font-normal" class="state-toggle" checked>
+    <input type="radio" name="font-size" id="font-large" class="state-toggle">
+    <input type="radio" name="font-size" id="font-xlarge" class="state-toggle">
+    <input type="checkbox" id="contrast-toggle" class="state-toggle">
+
+    <!-- Barra Superior de Controles -->
+    <div class="accessibility-bar" role="region" aria-label="Opções de Acessibilidade">
+        <span><strong>Acessibilidade:</strong></span>
+        <div class="accessibility-controls">
+            <label for="contrast-toggle" class="btn-access" tabindex="0" role="button" aria-pressed="false">
+                <span class="icon">👁️</span> Alto Contraste
+            </label>
+            <label for="font-normal" class="btn-access" tabindex="0" role="button">
+                A
+            </label>
+            <label for="font-large" class="btn-access" tabindex="0" role="button">
+                A+
+            </label>
+            <label for="font-xlarge" class="btn-access" tabindex="0" role="button">
+                A++
+            </label>
+        </div>
+    </div>
+
+    <!-- Cabeçalho Principal -->
+    <header role="banner">
+        <h1>🔒 Guia de Segurança Digital Amiga</h1>
+        <p>Aprenda a navegar na internet e usar seu celular com total tranquilidade e proteção.</p>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main id="main-content" role="main">
+
+        <!-- Seção 1: Regras Ouro -->
+        <section class="card" aria-labelledby="regras-ouro-title">
+            <h2 id="regras-ouro-title">⭐ As 3 Regras de Ouro do Usuário Seguro</h2>
+            <div class="tips-grid">
+                <div class="tip-item danger">
+                    <h3>1. Nunca passe Senhas</h3>
+                    <p>Bancos, policiais e empresas <strong>NUNCA</strong> pedem sua senha por telefone ou mensagens WhatsApp.</p>
+                </div>
+                <div class="tip-item success">
+                    <h3>2. Desconfie de Urgência</h3>
+                    <p>Se falarem: <em>"Tem que pagar hoje ou sua conta será bloqueada"</em>, pare e respire. Golpistas usam a pressa!</p>
+                </div>
+                <div class="tip-item">
+                    <h3>3. Na dúvida, confirme</h3>
+                    <p>Recebeu mensagem de um parente pedindo dinheiro? Ligue para o número antigo dele para confirmar a história.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção 2: Principais Golpes e Como Evitar -->
+        <section class="card" aria-labelledby="golpes-title">
+            <h2 id="golpes-title">📲 Proteja-se dos Golpes mais Comuns</h2>
+
+            <details>
+                <summary>🟢 Golpes no WhatsApp (Mensagem do Falso Familiar)</summary>
+                <p style="margin-top: 10px;"><strong>Como funciona:</strong> Alguém usa uma foto de um filho ou neto com um número diferente e diz que trocou de celular, pedindo dinheiro via PIX.</p>
+                <p><strong>O que fazer:</strong> Nunca faça transferência! Ligue imediatamente para o número habitual da pessoa para conferir.</p>
+            </details>
+
+            <details>
+                <summary>🏦 Falsa Central Telefônica do Banco</summary>
+                <p style="margin-top: 10px;"><strong>Como funciona:</strong> Você recebe uma ligação dizendo que houve uma compra suspeita no seu cartão e que você deve cancelar digitando senhas.</p>
+                <p><strong>O que fazer:</strong> Desligue o telefone na hora. Pegue seu cartão, veja o número oficial no verso e ligue de outro telefone se possível.</p>
+            </details>
+
+            <details>
+                <summary>🎁 Links Falsos de Prêmios e Promoções</summary>
+                <p style="margin-top: 10px;"><strong>Como funciona:</strong> Mensagens dizendo que você ganhou um prêmio, uma cesta de presentes ou desconto na conta de luz se clicar num link.</p>
+                <p><strong>O que fazer:</strong> Não clique no link. Apague a mensagem imediatamente.</p>
+            </details>
+        </section>
+
+        <!-- Seção 3: Treinamento / Prática Interativa -->
+        <section class="card" aria-labelledby="treino-title">
+            <h2 id="treino-title">🧠 Teste Seus Conhecimentos (Simulado)</h2>
+            <p style="margin-bottom: 15px;"><strong>Cenário:</strong> Você recebe a seguinte mensagem no celular: <em>"Pai, troquei de número. Preciso pagar uma conta urgente hoje, me manda R$ 300 pelo PIX?"</em></p>
+            
+            <p><strong>O que você deve fazer?</strong></p>
+
+            <details>
+                <summary class="quiz-option">Opção A: Fazer o PIX rapidamente para ajudar seu filho.</summary>
+                <div style="padding: 10px; background-color: #ffdddd; color: #900; border-radius: 6px; margin-top: 5px;">
+                    ❌ <strong>Incorreto!</strong> Essa é a forma mais comum de golpe. Nunca envie dinheiro sem falar diretamente por voz com a pessoa no número antigo.
+                </div>
+            </details>
+
+            <details>
+                <summary class="quiz-option">Opção B: Desconfiar e ligar para o número antigo do seu filho para perguntar se é verdade.</summary>
+                <div style="padding: 10px; background-color: #ddffdd; color: #006600; border-radius: 6px; margin-top: 5px;">
+                    ✅ <strong>Parabéns! Resposta Correta!</strong> Sempre confirme por ligação ou em pessoa antes de fazer qualquer transferência financeira.
+                </div>
+            </details>
+
+            <details>
+                <summary class="quiz-option">Opção C: Mandar a foto do seu cartão de crédito para a pessoa resolver o problema.</summary>
+                <div style="padding: 10px; background-color: #ffdddd; color: #900; border-radius: 6px; margin-top: 5px;">
+                    ❌ <strong>Incorreto!</strong> Nunca envie dados de cartões ou senhas por mensagens digitais.
+                </div>
+            </details>
+        </section>
+
+        <!-- Seção 4: Botão de Emergência SOS -->
+        <section class="card sos-section" aria-labelledby="sos-title">
+            <h2 id="sos-title" style="color: var(--warning); border-bottom-color: var(--warning);">🚨 Caiu em um golpe? Saiba o que fazer agora!</h2>
+            <ol style="margin-left: 20px; margin-bottom: 15px;">
+                <li><strong>Avisar o Banco:</strong> Ligue imediatamente para o seu banco e peça o bloqueio do PIX ou do cartão de crédito.</li>
+                <li><strong>Boletim de Ocorrência:</strong> Peça ajuda a um familiar para ir até uma delegacia ou fazer um B.O. online.</li>
+                <li><strong>Avisar Conhecidos:</strong> Caso tenham clonado seu WhatsApp, avise amigos e familiares para ignorarem pedidos de dinheiro.</li>
+            </ol>
+            
+            <a href="tel:190" class="btn-sos" aria-label="Ligar para a Polícia Militar pelo número 190">
+                📞 Ligar para a Polícia (190)
+            </a>
+            <a href="tel:181" class="btn-sos" style="background-color: #555; margin-top: 10px;" aria-label="Ligar para o Disque Denúncia pelo 181">
+                🗣️ Disque Denúncia (181)
+            </a>
+        </section>
+
+    </main>
+
+    <!-- Rodapé da Aplicação -->
+    <role role="contentinfo">
+        <footer>
+            <p><strong>Segurança Digital Amiga</strong> - Desenvolvido para a Proteção da Terceira Idade.</p>
+            <p style="font-size: 0.9rem; margin-top: 5px;">Nenhuma informação pessoal é armazenada ou coletada nesta página.</p>
+        </footer>
+    </role>
+
+</body>
+</html>
